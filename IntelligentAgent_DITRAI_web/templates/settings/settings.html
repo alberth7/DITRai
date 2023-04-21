@@ -1,0 +1,115 @@
+{% extends "home_base.html" %}
+
+
+{% block content %}
+{% if current_user.is_authenticated %}
+    <div class="content-form">
+    <h1>Configuración:</h1>
+    <hr>
+    <form method="POST" name ="form1">
+        <div class="mb-3">
+            <label for="chat_id" class="form-label">ID chat de Telegram</label>
+            <input type="text" class="form-control" placeholder="0" id="chat_id" name="chat_id" value="{{ data_settings.chatId }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="telegramToken" class="form-label">Telegram Token</label>
+            <input type="text" class="form-control" placeholder="0" id="telegramToken" name="telegramToken" value="{{ data_settings.telegramToken }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="monitorSystem" class="form-label">¿Con qué frecuencia se realizará la monitorización de la red? (minutos)</label>
+            <input type="text" class="form-control" id="monitorSystem" name="monitorSystem" value="{{ data_settings.monitorSystem }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="frecuencyGetTableTrafict" class="form-label">¿Con qué frecuencia el sistema solicitará la tabla de estado de conexiones? (segundos) </label>
+            <input type="text" class="form-control" id="frecuencyGetTableTrafict" name="frecuencyGetTableTrafict" value="{{ data_settings.frecuencyGetTableTrafict }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="timeFrecuencyGetTableTrafict" class="form-label">¿Cuánto tiempo se se solicitará la solicitud de la tabla de estado de conexiones? (segundos)</label>
+            <input type="text" class="form-control" id="timeFrecuencyGetTableTrafict" name="timeFrecuencyGetTableTrafict" value="{{ data_settings.timeFrecuencyGetTableTrafict }}" required>
+        </div>
+
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}" role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        
+        <script>
+        $(document).ready(function() {
+            setTimeout(function() {
+                $('.alert').fadeOut('fast');
+            }, 1000);
+        });
+        </script>
+        
+        <div class="text-center">
+          <button type="submit" name="submit1" class="btn btn-primary">Guardar</button>
+        </div>
+      </form>
+    </div>
+
+  <form method="POST" name ="form1">
+    
+  </form>
+  <!-- Prender/apagar DITRai  -->
+    <div class="content-form">
+      <h1>Encendido / Apagado de DITRai:</h1>   
+
+    <hr>
+    <form method="POST" name ="form2">
+      <div class="mb-3">
+        <label for="beginEnd" class="form-label">El agente inteligente esta ejecutandoce: 1 = SI, 0 = NO</label>
+        <input type="text" class="form-control" id="beginEnd" name="beginEnd" value="{{ data_settings.beginEnd }}" readonly>
+      </div>
+      <div class="text-center">
+        <button onclick="" type="submit" name="submit2" class="btn btn-success">Encender</button>
+        <button onclick="" name="submit3" type="submit" class="btn btn-danger">Apagar</button>
+      </div>
+    </form>
+
+    <script>
+        function executeCommandEncender() {
+          fetch('/execute').then(response => {
+            if (response.ok) {
+              response.text().then(text => {
+                console.log(text);  // imprimir la salida del comando en la consola del navegador
+              });
+            } else {
+              console.error(response.statusText);  // imprimir el mensaje de error en la consola del navegador
+            }
+          });
+        }
+        
+        function executeApagar() {
+          fetch('/executeApagar').then(response => {
+            if (response.ok) {
+              response.text().then(text => {
+                console.log(text);  // imprimir la salida del comando en la consola del navegador
+              });
+            } else {
+              console.error(response.statusText);  // imprimir el mensaje de error en la consola del navegador
+            }
+          });
+        }
+      </script>
+    </div>
+
+    
+    {% else %}
+    <div class="alert alert-danger" role="alert">
+      Usted no inicio sessión !  
+    </div>
+    {% endif%}  
+     
+{% endblock %}
+
+

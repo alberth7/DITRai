@@ -1,0 +1,27 @@
+{% extends "home_base.html" %}
+
+
+{% block content %}
+{% if current_user.is_authenticated %}
+    <div class="content-form">
+    
+        <div class="container">
+            <div class="card mt-5">
+                <div class="card-body">
+                    <h5 class="card-title">Reglas Iptable:</h5>
+                    <textarea class="form-control" rows="10" readonly>{{ datos }}</textarea>
+                </div>
+            </div>
+        </div>
+
+    </div>
+      
+    {% else %}
+    <div class="alert alert-danger" role="alert">
+      Usted no inicio sessión !  
+    </div>
+    {% endif%}  
+     
+{% endblock %}
+
+

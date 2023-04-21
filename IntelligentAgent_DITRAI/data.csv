@@ -1,0 +1,6 @@
+originalsrc_layer3,originaldst_layer3,originalprotoum_layer4,originalprotoname_layer4,originalpackets,originalbytes,replyprotoum_layer4,replysport_layer4,replydport_layer4,replypackets,replybytes,estado,timeout,use,bad_traffic,datetime,frecuencia
+10.0.0.10,10.0.0.1,17,udp,1,62,17,53,57628,1,107,,46,1,0,28/03/23 02:54:32,1
+10.0.0.10,10.0.0.1,17,udp,1,81,17,53,35534,1,161,,52,1,0,28/03/23 02:54:32,1
+10.0.0.10,10.0.0.1,17,udp,1,78,17,53,51993,1,164,,53,1,0,28/03/23 02:54:32,1
+10.0.1.60,10.0.0.20,6,tcp,3063,1077105,6,5050,1851,4355,1422030,ESTABLISHED,7439,1,0,28/03/23 02:54:32,1
+10.0.1.208,64.233.186.119,17,udp,3,2623,17,443,40549,3,3834,ESTABLISHED,59,1,0,28/03/23 02:54:32,1

@@ -1,0 +1,45 @@
+{% extends "home_base.html" %}
+
+
+{% block content %}
+{% if current_user.is_authenticated %}
+    <div class="content-form">
+    <h1>Configuración API Model:</h1>
+    <hr>
+    <form method="POST">
+        <div class="mb-3">
+            <label for="model_1" class="form-label">API model 1:</label>
+            <input type="text" class="form-control" placeholder="0" id="model_1" name="model_1" value="{{ data_settings.model_1 }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="model_2" class="form-label">API model 2:</label>
+            <input type="text" class="form-control" placeholder="0" id="model_2" name="model_2" value="{{ data_settings.model_2 }}" required>
+        </div>
+
+      
+        
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-success alert-dismissible fade show">
+          {{ message }} 
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button> 
+        </div>
+        {% endfor %}
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">Guardar</button>
+        </div>
+      </form>
+    </div>
+
+ 
+
+    
+    {% else %}
+    <div class="alert alert-danger" role="alert">
+      Usted no inicio sessión !  
+    </div>
+    {% endif%}  
+     
+{% endblock %}
+
+
