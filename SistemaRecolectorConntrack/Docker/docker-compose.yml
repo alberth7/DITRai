@@ -1,0 +1,31 @@
+version: '3.7'
+
+services:
+  postgres:
+    container_name: postgres_container
+    build:
+      context: ./Docker_postgres
+      dockerfile: db.Dockerfile
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-mypwd}
+      PGDATA: /data/postgres
+    volumes:
+       - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - graf
+      - pg
+    restart: unless-stopped
+
+networks:
+   graf:
+      driver: bridge
+   pg:
+      driver: bridge
+
+
+volumes:
+    postgres:
+    grafana:

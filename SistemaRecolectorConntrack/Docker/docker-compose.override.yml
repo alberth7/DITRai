@@ -1,0 +1,63 @@
+version: '3.7'
+
+services:
+  postgres:
+    container_name: postgres_container
+    build:
+      context: ./Docker_postgres
+      dockerfile: db.Dockerfile
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-mypwd}
+      PGDATA: /data/postgres
+    volumes:
+       - postgres:/data/postgres
+    ports:
+      - "5432:5432"
+    networks:
+      - graf
+      - pg
+    restart: unless-stopped
+
+  mygrafana:
+    image: grafana/grafana:latest
+    container_name: grafana_container
+    ports:
+      - "3000:3000"
+    environment:
+       GF_SERVER_ROOT_URL: http://localhost:3000/grafana/
+       GF_SERVER_SERVE_FROM_SUB_PATH: "true"
+    networks:
+      - graf
+    volumes:
+      - grafana:/var/lib/grafana:rw
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-pgadmin4@pgadmin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+    volumes:
+       - pgadmin:/root/.pgadmin
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    networks:
+      - pg
+    restart: unless-stopped
+
+
+networks:
+   graf:
+      driver: bridge
+   pg:
+      driver: bridge
+
+
+volumes:
+    postgres:
+    pgadmin:
+    grafana:
+
+

@@ -1,4 +1,21 @@
-# Install router 
+# SOFTWARE INTELIGENTE PARA DETECTAR CONEXIONES TCP/UDP SOSPECHOSAS EN DISPOSITIVOS CONECTADOS A INTERNET BASADO EN MACHINE LEARNING
+
+## IntelligentAgent_DITRAI
+Agente intelingente
+
+## IntelligentAgent_DITRAI_web
+Interfaz de control web
+
+## SistemaRecolectorConntrack
+Sistema recolector de estado conntrack
+
+## DataSet
+
+https://drive.google.com/drive/folders/1eOEzm4m4l3uqDMtnUFPMMjE7xKFwX8Ya
+
+### Configuración del router
+
+#### Instalación de módulos en el router 
 opkg install conntrack
 opkg install openssh-sftp-server
 
@@ -64,7 +81,9 @@ Para ver la ejecición de los servicios:
 sudo systemctl status ditrai.service
 '''
 
-# Configuración para el servidor web nginx
+### Configuración del Raspberry 
+Esta parte es para la configuración para la ejecución del agente inteligente y la interfaz de control web que funcionen en el Rapberry
+#### Configuración para el servidor web nginx
 
 En la ruta /etc/nginx/sites-avaible/default cambiar por
 
@@ -90,7 +109,7 @@ Recargamos el servicio de nginx:
 systemctl reload nginx
 '''
 
-# Configuracion del  demonio ditrai
+#### Configuracion del  demonio ditrai
 En el archivo /etc/sudoers adicionar al final este comando
 '''
 michael ALL=NOPASSWD: /bin/systemctl restart ditrai.service
